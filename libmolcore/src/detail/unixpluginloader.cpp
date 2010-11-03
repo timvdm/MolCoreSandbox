@@ -11,7 +11,6 @@
 #include <boost/foreach.hpp>
 #define foreach BOOST_FOREACH
 
-#include <boost/assign/list_of.hpp>
 
 
 namespace molcore {
@@ -117,6 +116,10 @@ namespace molcore {
         return execute_function<std::string, std::string()>(filename, "plugin_name");
       }
 
+      std::vector<std::string> getPluginTemplateParams(const std::string &filename)
+      {
+        return execute_function<std::vector<std::string>, std::vector<std::string>()>(filename, "plugin_template_params");
+      }
 
     };
       
@@ -125,24 +128,6 @@ namespace molcore {
       return new UnixPluginLoader;
     }
     
-    std::vector<std::string> PluginLoader::getPluginNames()
-    {
-      std::vector<std::string> names, files = getPluginFiles();
-
-      foreach(const std::string &file, files) {
-        std::string name = getPluginName(file);
-        if (!name.empty())
-          names.push_back(name);
-      }
-
-      return names;
-    }
-
-    std::vector<std::string> PluginLoader::getPluginFiles()
-    {
-      return boost::assign::list_of("lib/libsmilesformat.so");
-    }
-
 
   }
 }

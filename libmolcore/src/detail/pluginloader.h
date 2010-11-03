@@ -19,12 +19,10 @@ namespace molcore {
       typedef std::map<std::string, std::string> PluginInfo;
 
       virtual ~PluginLoader() {}
-      virtual std::vector<std::string> getPluginFiles();
-      virtual std::vector<std::string> getPluginNames();
        
       virtual std::string getPluginName(const std::string &filename) = 0;
+      virtual std::vector<std::string> getPluginTemplateParams(const std::string &filename) = 0;
 
-      virtual void getPluginInfo(PluginInfo &pluginInfo, const std::vector<std::string> &files) = 0;    
       virtual boost::shared_ptr<PluginFactory> factory(const std::string &filename, const std::string &symbol) = 0;
 
 
